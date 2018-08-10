@@ -128,30 +128,30 @@ func (m PostRepository) GetItemByUID(uid int) *Item {
 }
 
 func (m PostRepository) GetBorrowedItemAll() *[]replyAllList {
-	replies := []replyAllList{}
+	var replies []replyAllList
 	db.Table("").Select("items.item_name,items.status,users.user_name").Joins("join users on items.user_id = users.user_id").Where("items.status = 1").Scan(&replies)
 
 	//db.Find(&items)
 	return &replies
 }
 func (m PostRepository) GetItemAll() *[]replyAllList{
-	replies := []replyAllList{}
+	var replies []replyAllList
 	db.Table("items").Select("items.item_id,items.item_name,items.status,users.user_name").Joins("join users on items.origin_id = users.user_id").Scan(&replies)
 	return &replies
 }
 func (m PostRepository) GetUserAll() *[]User {
-	users := []User{}
+	var users []User
 	db.Find(&users)
 
 	return &users
 }
 func (m PostRepository) GetLendingsAll() *[]replyLendingList {
-	lendings := []replyLendingList{}
+	var lendings []replyLendingList
 	db.Table("lendings").Select("items.item_name,users.user_name,lendings.created_at").Joins("left outer join items on items.item_id = lendings.item_id").Joins("left join users on users.user_id = lendings.user_id").Scan(&lendings)
 	return &lendings
 }
 func (m PostRepository) GetHistoriesAll() *[]lendingHistory {
-	histories := []lendingHistory{}
+	var histories []lendingHistory
 	db.Table("lending_histories").Select("items.item_name,users.user_name,lendings.created_at").Joins("left outer join items on items.item_id = lendings.item_id").Joins("left join users on users.user_id = lendings.user_id").Scan(&histories)
 	return &histories
 }
