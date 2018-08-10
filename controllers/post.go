@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"github.com/onsd/EquipmentManagement2/models"
+	"github.com/onsd/EquipmentManagement/models"
 )
 
 type Post struct{}

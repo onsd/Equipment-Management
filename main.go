@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"github.com/onsd/EquipmentManagement2/controllers"
+	"github.com/onsd/EquipmentManagement/controllers"
 	"net/http"
 	"strconv"
 )

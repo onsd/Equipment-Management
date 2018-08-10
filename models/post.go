@@ -50,15 +50,6 @@ type lendingHistory struct{
 }
 
 func init() {
-	/*DBMS := "mysql"
-	USER := "taka"
-	PASS := "taka"
-	PROTOCOL := "tcp(localhost:3306)"
-	DBNAME := "test?parseTime=True"
-
-	CONNECT := USER + ":" + PASS + "@" + PROTOCOL + "/" + DBNAME
-	db, err := gorm.Open(DBMS, CONNECT)
-	*/
 	conn, err := gorm.Open("mysql", "taka:taka@/test2?charset=utf8&parseTime=True&loc=Local")
 	if err != nil {
 		panic(err)
@@ -175,11 +166,9 @@ func (m PostRepository) UpdateItemByUID(borrow bool, uid int, userID int) interf
 		db.Create(&history)
 		db.Create(&lending)
 	} else {
-		//lending.ItemId = uid
-		//db.First(&lending)
-		//fmt.Println(lending)
-		//db.Unscoped().Delete(&lending)
-		db.Exec("DELETE FROM lendings WHERE item_id = ?",uid)
+		//db.Delete()ではlendingsの中身が全て消えていたため断念
+		db.Exec("DELETE FROM lendings WHERE item_id = ?",uid)  //lendingsテーブルにuidは一つしか無いはずなのでこれで対応
+
 	}
 	db.Find(&lending, "ItemId=?", uid)
 
