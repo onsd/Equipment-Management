@@ -50,7 +50,7 @@ type lendingHistory struct {
 }
 
 func init() {
-	conn, err := gorm.Open("mysql", "root@/test?charset=utf8&parseTime=True&loc=Local")
+	conn, err := gorm.Open("mysql", "taka:taka@/test?charset=utf8&parseTime=True&loc=Local")
 	if err != nil {
 		panic(err)
 	}

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>備品管理</title>
+    <!-- BootstrapのCSS読み込み -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- jQuery読み込み -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- BootstrapのJS読み込み -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron">
+        <h1>備品管理サイト</h1>
+        <p>豊田工業高等専門学校　コンピュータ部のための備品管理システムです</p>
+    </div>
+    <p>工事中です。デザインがかわったりデータが消える可能性があります</p>
+
+
+    <!-- タブ・メニュー -->
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#sampleContentA" data-toggle="tab">備品リスト</a></li>
+        <li><a href="#sampleContentB" data-toggle="tab">貸出中</a></li>
+        <li><a href="#sampleContentC" data-toggle="tab">ユーザーリスト</a></li>
+        <li><a href="#sampleContentD" data-toggle="tab">タブＤ</a></li>
+    </ul>
+
+    <!-- 備品リストのタブ内容 -->
+    <div class="tab-content">
+        <div class="tab-pane active" id="sampleContentA">
+            <div class="container" >
+                <table class="table table-striped" >
+                    <thead>
+                    <tr>
+                        <th>UID</th>
+                        <th>備品名</th>
+                        <th>貸出可能物品</th>
+                        <th>所有者</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{ range $index, $item := .item }}
+                    <tr>
+                        <td>{{ $item.ItemId }} </td>
+                        <td>{{ $item.ItemName}} </td>
+                        <td>{{ $item.Status }}</td>
+                        <td>{{ $item.UserName}}</td>
+                    </tr>
+                    {{ end }}
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <!-- 貸出中リスト -->
+        <div class="tab-pane" id="sampleContentB">
+            <div class="container" >
+                <table class="table table-striped" >
+                    <thead>
+                    <tr>
+                        <th>物品名</th>
+                        <th>借りてる人</th>
+                        <th>借りた日</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{ range $index, $lending := .lending }}
+                    <tr>
+                        <td>{{ $lending.ItemName }}</td>
+                        <td>{{ $lending.UserName }} </td>
+                        <td>{{ $lending.CreatedAt }}</td>
+                    </tr>
+                    {{ end }}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- ユーザーリストリストのタブ内容 -->
+        <div class="tab-pane" id="sampleContentC">
+            <div class="container" >
+                <table class="table table-striped" >
+                    <thead>
+                    <tr>
+                        <th>ユーザーID</th>
+                        <th>ユーザー名</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{ range $index, $user := .user }}
+                    <tr>
+                        <td>{{ $user.UserId }}</td>
+                        <td>{{ $user.UserName}} </td>
+
+
+                    </tr>
+                    {{ end }}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="tab-pane" id="sampleContentD">
+            <p>タブＤの内容</p>
+        </div>
+    </div>
+
+    <div class="panel-group container" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">備品を借りる/返す</a>
+                </h4>
+            </div>
+            <div id="collapse4" class="panel-collapse collapse">
+                <div class="container">
+                    <form method="post" action="/index/borrowItem/">
+
+                        <fieldset class="form-group">
+                        <!-- TODO: めっちゃはみ出てんのどうにかする-->
+                        <div class="form-group">
+                            <div class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-default active">
+                                    <input type="radio" autocomplete="off" value="1" name="Borrow" checked> 借りる
+                                </label>
+                                <label class="btn btn-default">
+                                    <input type="radio" autocomplete="off" value="0" name="Borrow" > 返す
+                                </label>
+
+                            </div>
+                          <br>
+                            <label>ユーザーID</label>
+                            <input  type="text" name="UserID" class="form-control">
+                            <label>アイテムID</label>
+                            <input type="text" name="ItemID" class="form-control">
+                        </div>
+
+                        <button type="button submit" class="btn btn-primary btn-lg btn-block">登録</button>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">備品追加</a>
+                </h4>
+            </div>
+            <div id="collapse3" class="panel-collapse collapse ">
+                <div class="container">
+                    <form method="post" action="/index/addNewItem/">
+                        <div class="form-group">
+                            <label>新しい備品の名前</label>
+                            <input type="text" name="ITEMNAME" class="form-control">
+                            <label>所有者の名前</label>
+                            <input type="text" name="USERID" class="form-control">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">登録</button>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">ユーザー登録</a>
+                </h4>
+            </div>
+            <div id="collapse5" class="panel-collapse collapse">
+                <div class="container">
+                    <form method="post" action="/index/addNewUser/">
+                        <div class="form-group">
+                            <label>ユーザー名</label>
+                            <input type="text" name="UserName" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">登録</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</body>
