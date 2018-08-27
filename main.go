@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"github.com/onsd/EquipmentManagement/controllers"
+	"github.com/onsd/Equipment-Management/controllers"
 	"net/http"
 	"strconv"
 )
@@ -11,7 +11,7 @@ import (
 func main() {
 	router := gin.Default()
 	router.LoadHTMLGlob("templates/*.tmpl")
-	router.GET("",routingToIndex)
+	router.GET("", routingToIndex)
 	router.GET("/index", getIndex)
 	router.GET("/index/getItem/", getItemByUID)
 	router.GET("/index/getItemAll/", getItemAll)
@@ -21,6 +21,7 @@ func main() {
 
 	router.Run(":8080")
 }
+
 //API用　curlなどでもってこれる
 func getItemByUID(c *gin.Context) { //curl localhost:8080/index/getItem/ -d "uid"
 	n := c.PostForm("uid")
@@ -45,7 +46,7 @@ func addNewItem(c *gin.Context) { //curl -P "POST" localhost:8080/index/addNewIt
 	user := c.Request.Form["USERID"]
 	uid, _ := strconv.Atoi(user[0])
 	ctrl := controllers.NewPost()
-	ok := ctrl.PostNewItem(itemName[0],uid)
+	ok := ctrl.PostNewItem(itemName[0], uid)
 	if ok {
 		c.Redirect(301, "/index/")
 	}
@@ -63,7 +64,6 @@ func addNewUser(c *gin.Context) { //curl -P "POST" localhost:8080/addNewUser/ -d
 		c.JSON(400, nil)
 	}
 }
-
 
 func borrowNewItemByUID(c *gin.Context) { //curl -P "POST" localhost:8080/addNewItem/ -d "uid=XXX" -d "userid=XXX"
 	//POSTされた情報をParseする
@@ -103,13 +103,13 @@ func getIndex(c *gin.Context) {
 	histories := ctrl.GetHistoriesAll()
 
 	c.HTML(http.StatusOK, "index.tmpl", gin.H{
-		"item": items,
-		"user": users,
+		"item":    items,
+		"user":    users,
 		"lending": lendings,
-		"history" : histories,
+		"history": histories,
 	})
 }
 
-func routingToIndex(c *gin.Context){
-	c.Redirect(301,"/index/")
+func routingToIndex(c *gin.Context) {
+	c.Redirect(301, "/index/")
 }

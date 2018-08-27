@@ -10,17 +10,17 @@ var db *gorm.DB
 var userList = []string{"taka", "asasigure", "sasamoto", "tt"} // -1:部活所有
 var itemList = []string{"ラズベリーパイ１号", "ラズベリーパイ２号", "ラズベリーパイ３号", "C++の本", "Pythonの本"}
 
-type Lending struct{
-	ItemId int
-	UserId int
+type Lending struct {
+	ItemId    int
+	UserId    int
 	CreatedAt time.Time
 }
 
 type Item struct {
-	ItemId       int    `gorm:"primary_key"`
+	ItemId    int    `gorm:"primary_key"`
 	ItemName  string `sql:"type:varchar(32);"`
 	Status    bool
-	OriginId    int
+	OriginId  int
 	CreatedAt time.Time
 	UpdatedAt time.Time //CheckoutDate
 }
@@ -31,26 +31,26 @@ type User struct {
 }
 
 type replyAllList struct {
-	ItemId       string
-	ItemName  string
-	Status    bool
-	UserName  string
+	ItemId   string
+	ItemName string
+	Status   bool
+	UserName string
 }
 
-type replyLendingList struct{
-	ItemName string
-	UserName string
+type replyLendingList struct {
+	ItemName  string
+	UserName  string
 	CreatedAt time.Time
 }
 
-type lendingHistory struct{
-	ItemId int
-	UserId int
+type lendingHistory struct {
+	ItemId    int
+	UserId    int
 	CreatedAt time.Time
 }
 
 func init() {
-	conn, err := gorm.Open("mysql", "taka:taka@/test2?charset=utf8&parseTime=True&loc=Local")
+	conn, err := gorm.Open("mysql", "root@/test?charset=utf8&parseTime=True&loc=Local")
 	if err != nil {
 		panic(err)
 	}
@@ -69,10 +69,10 @@ func init() {
 		db.Create(NONE)
 		addUser()
 	}
-	if !db.HasTable(&Lending{}){
+	if !db.HasTable(&Lending{}) {
 		db.AutoMigrate(&Lending{})
 	}
-	if !db.HasTable(&lendingHistory{}){
+	if !db.HasTable(&lendingHistory{}) {
 		db.AutoMigrate(&lendingHistory{})
 	}
 
@@ -91,7 +91,7 @@ func addItem() {
 		newUser := Item{
 			ItemName: itemList[i],
 			Status:   true,
-			OriginId:   -1,
+			OriginId: -1,
 		}
 		db.Create(&newUser)
 	}
@@ -103,11 +103,11 @@ func NewPostRepository() PostRepository {
 	return PostRepository{}
 }
 
-func (m PostRepository) PostNewItem(itemName string,userId int) bool {
+func (m PostRepository) PostNewItem(itemName string, userId int) bool {
 	newItem := Item{
 		ItemName: itemName,
 		Status:   true, //未貸出
-		OriginId:   userId,
+		OriginId: userId,
 	}
 	db.Create(&newItem)
 	return true
@@ -134,7 +134,7 @@ func (m PostRepository) GetBorrowedItemAll() *[]replyAllList {
 	//db.Find(&items)
 	return &replies
 }
-func (m PostRepository) GetItemAll() *[]replyAllList{
+func (m PostRepository) GetItemAll() *[]replyAllList {
 	var replies []replyAllList
 	db.Table("items").Select("items.item_id,items.item_name,items.status,users.user_name").Joins("join users on items.origin_id = users.user_id").Scan(&replies)
 	return &replies
@@ -167,7 +167,7 @@ func (m PostRepository) UpdateItemByUID(borrow bool, uid int, userID int) interf
 		db.Create(&lending)
 	} else {
 		//db.Delete()ではlendingsの中身が全て消えていたため断念
-		db.Exec("DELETE FROM lendings WHERE item_id = ?",uid)  //lendingsテーブルにuidは一つしか無いはずなのでこれで対応
+		db.Exec("DELETE FROM lendings WHERE item_id = ?", uid) //lendingsテーブルにuidは一つしか無いはずなのでこれで対応
 
 	}
 	db.Find(&lending, "ItemId=?", uid)
