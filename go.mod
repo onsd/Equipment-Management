@@ -15,3 +15,4 @@ require (
 	gopkg.in/go-playground/validator.v8 v8.18.1
 	gopkg.in/yaml.v2 v2.0.0-20160928153709-a5b47d31c556
 )
+heroku install ./cmd/...
