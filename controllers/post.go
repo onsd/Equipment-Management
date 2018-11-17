@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"github.com/onsd/EquipmentManagement/models"
+	"github.com/onsd/Equipment-Management/models"
 )
 
 type Post struct{}
@@ -10,9 +10,9 @@ func NewPost() Post {
 	return Post{}
 }
 
-func (c Post) PostNewItem(itemName string ,originUserId int) bool {
+func (c Post) PostNewItem(itemName string, originUserId int) bool {
 	repo := models.NewPostRepository()
-	ok := repo.PostNewItem(itemName,originUserId)
+	ok := repo.PostNewItem(itemName, originUserId)
 	return ok
 }
 
@@ -39,12 +39,12 @@ func (c Post) GetUserAll() interface{} {
 	users := repo.GetUserAll()
 	return users
 }
-func (c Post) GetLendingAll() interface{}{
+func (c Post) GetLendingAll() interface{} {
 	repo := models.NewPostRepository()
 	lendings := repo.GetLendingsAll()
 	return lendings
 }
-func (c Post) GetHistoriesAll() interface{}{
+func (c Post) GetHistoriesAll() interface{} {
 	repo := models.NewPostRepository()
 	histories := repo.GetHistoriesAll()
 	return histories

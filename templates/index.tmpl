@@ -1,198 +1,182 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html >
 <head>
-    <meta charset="utf-8">
+    <!-- Site made with Mobirise Website Builder v4.8.1, https://mobirise.com -->
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>備品管理</title>
-    <!-- BootstrapのCSS読み込み -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <!-- jQuery読み込み -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <!-- BootstrapのJS読み込み -->
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <meta name="generator" content="Mobirise v4.8.1, mobirise.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <link rel="shortcut icon" href="assets/images/logo4.png" type="image/x-icon">
+    <meta name="description" content="">
+    <title>Home</title>
+    <link rel="stylesheet" href="assets/tether/tether.min.css">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="assets/datatables/data-tables.bootstrap4.min.css">
+    <link rel="stylesheet" href="assets/theme/css/style.css">
+    <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
+
+
+
 </head>
 <body>
-<div class="container">
-    <div class="jumbotron">
-        <h1>備品管理サイト</h1>
-        <p>豊田工業高等専門学校　コンピュータ部のための備品管理システムです</p>
+<section class="mbr-section content5 cid-r1Vmq19C1R mbr-parallax-background" id="content5-1">
+
+
+
+
+
+    <div class="container">
+        <div class="media-container-row">
+            <div class="title col-12 col-md-8">
+                <h2 class="align-center mbr-bold mbr-white pb-3 mbr-fonts-style display-1">
+                    ARTICLE HEADER
+                </h2>
+                <h3 class="mbr-section-subtitle align-center mbr-light mbr-white pb-3 mbr-fonts-style display-5">
+                    Article header with background image and parallax effect
+                </h3>
+
+
+            </div>
+        </div>
     </div>
-    <p>工事中です。デザインがかわったりデータが消える可能性があります</p>
+</section>
+
+<section class="engine"><a href="https://mobiri.se/b">how to create your own site for free</a></section><section class="section-table cid-r1VmzfcpIf" id="table1-2">
 
 
-    <!-- タブ・メニュー -->
-    <ul class="nav nav-tabs">
-        <li class="active"><a href="#sampleContentA" data-toggle="tab">備品リスト</a></li>
-        <li><a href="#sampleContentB" data-toggle="tab">貸出中</a></li>
-        <li><a href="#sampleContentC" data-toggle="tab">ユーザーリスト</a></li>
-        <li><a href="#sampleContentD" data-toggle="tab">タブＤ</a></li>
-    </ul>
 
-    <!-- 備品リストのタブ内容 -->
-    <div class="tab-content">
-        <div class="tab-pane active" id="sampleContentA">
-            <div class="container" >
-                <table class="table table-striped" >
+    <div class="container container-table">
+        <h2 class="mbr-section-title mbr-fonts-style align-center pb-3 display-2">
+            Table
+        </h2>
+        <h3 class="mbr-section-subtitle mbr-fonts-style align-center pb-5 mbr-light display-5">
+            Click blue "Gear" icon in the top right corner to hide/show search and info, change the the table background and other parameters.  In browser click on the table head to sort the table, use search to filter the table.
+        </h3>
+        <div class="table-wrapper">
+            <div class="container">
+                <div class="row search">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-6">
+                        <div class="dataTables_filter">
+                            <label class="searchInfo mbr-fonts-style display-7">Search:</label>
+                            <input class="form-control input-sm" disabled="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container scroll">
+                <table class="table isSearch" cellspacing="0">
                     <thead>
-                    <tr>
-                        <th>UID</th>
-                        <th>備品名</th>
-                        <th>貸出可能物品</th>
-                        <th>所有者</th>
-                    </tr>
+                    <tr class="table-heads ">
+                        <th class="head-item mbr-fonts-style display-7">Name</th><th class="head-item mbr-fonts-style display-7">
+                        Uid</th><th class="head-item mbr-fonts-style display-7">In rend?</th><th class="head-item mbr-fonts-style display-7">
+                        Whohas ?</th></tr>
                     </thead>
+
                     <tbody>
                     {{ range $index, $item := .item }}
                     <tr>
-                        <td>{{ $item.ItemId }} </td>
-                        <td>{{ $item.ItemName}} </td>
-                        <td>{{ $item.Status }}</td>
-                        <td>{{ $item.UserName}}</td>
-                    </tr>
-                    {{ end }}
-
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
-        <!-- 貸出中リスト -->
-        <div class="tab-pane" id="sampleContentB">
-            <div class="container" >
-                <table class="table table-striped" >
-                    <thead>
-                    <tr>
-                        <th>物品名</th>
-                        <th>借りてる人</th>
-                        <th>借りた日</th>
-
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {{ range $index, $lending := .lending }}
-                    <tr>
-                        <td>{{ $lending.ItemName }}</td>
-                        <td>{{ $lending.UserName }} </td>
-                        <td>{{ $lending.CreatedAt }}</td>
-                    </tr>
+                        <td class="body-item mbr-fonts-style display-7">$item.ItemName</td><td class="body-item mbr-fonts-style display-7">$item.ItemId</td><td class="body-item mbr-fonts-style display-7">$item.Status</td><td class="body-item mbr-fonts-style display-7">$item.UserName</td></tr>
                     {{ end }}
                     </tbody>
                 </table>
             </div>
-        </div>
-        <!-- ユーザーリストリストのタブ内容 -->
-        <div class="tab-pane" id="sampleContentC">
-            <div class="container" >
-                <table class="table table-striped" >
-                    <thead>
-                    <tr>
-                        <th>ユーザーID</th>
-                        <th>ユーザー名</th>
-
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {{ range $index, $user := .user }}
-                    <tr>
-                        <td>{{ $user.UserId }}</td>
-                        <td>{{ $user.UserName}} </td>
-
-
-                    </tr>
-                    {{ end }}
-
-                    </tbody>
-                </table>
+            <div class="container table-info-container">
+                <div class="row info">
+                    <div class="col-md-6">
+                        <div class="dataTables_info mbr-fonts-style display-7">
+                            <span class="infoBefore">Showing</span>
+                            <span class="inactive infoRows"></span>
+                            <span class="infoAfter">entries</span>
+                            <span class="infoFilteredBefore">(filtered from</span>
+                            <span class="inactive infoRows"></span>
+                            <span class="infoFilteredAfter"> total entries)</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6"></div>
+                </div>
             </div>
-        </div>
-        <div class="tab-pane" id="sampleContentD">
-            <p>タブＤの内容</p>
         </div>
     </div>
+</section>
 
-    <div class="panel-group container" id="accordion">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">備品を借りる/返す</a>
-                </h4>
-            </div>
-            <div id="collapse4" class="panel-collapse collapse">
-                <div class="container">
-                    <form method="post" action="/index/borrowItem/">
+<section class="tabs1 cid-r1Vs9VReIK mbr-parallax-background" id="tabs1-6">
 
-                        <fieldset class="form-group">
-                        <!-- TODO: めっちゃはみ出てんのどうにかする-->
-                        <div class="form-group">
-                            <div class="btn-group" data-toggle="buttons">
-                                <label class="btn btn-default active">
-                                    <input type="radio" autocomplete="off" value="1" name="Borrow" checked> 借りる
-                                </label>
-                                <label class="btn btn-default">
-                                    <input type="radio" autocomplete="off" value="0" name="Borrow" > 返す
-                                </label>
 
+
+
+    <div class="container">
+        <h2 class="mbr-white align-center pb-5 mbr-fonts-style mbr-bold display-2">
+            Tabs with parallax background
+        </h2>
+        <div class="media-container-row">
+            <div class="col-12 col-md-8">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item"><a class="nav-link mbr-fonts-style active show display-7" role="tab" data-toggle="tab" href="#tabs1-6_tab0" aria-selected="true">
+                        Mobile Friendly
+                    </a></li>
+                    <li class="nav-item"><a class="nav-link mbr-fonts-style active show display-7" role="tab" data-toggle="tab" href="#tabs1-6_tab1" aria-selected="true">
+                        No Coding
+                    </a></li>
+                    <li class="nav-item"><a class="nav-link mbr-fonts-style active show display-7" role="tab" data-toggle="tab" href="#tabs1-6_tab2" aria-selected="true">
+                        Unique Styles
+                    </a></li>
+
+
+
+                </ul>
+                <div class="tab-content">
+                    <div id="tab1" class="tab-pane in active" role="tabpanel">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p class="mbr-text py-5 mbr-fonts-style display-7">
+                                    No special actions required, all sites you make with Mobirise are mobile-friendly. You don't have to create a special mobile version of your site, it will adapt automagically.
+                                </p>
                             </div>
-                          <br>
-                            <label>ユーザーID</label>
-                            <input  type="text" name="UserID" class="form-control">
-                            <label>アイテムID</label>
-                            <input type="text" name="ItemID" class="form-control">
                         </div>
-
-                        <button type="button submit" class="btn btn-primary btn-lg btn-block">登録</button>
-
-                    </form>
-
-                </div>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">備品追加</a>
-                </h4>
-            </div>
-            <div id="collapse3" class="panel-collapse collapse ">
-                <div class="container">
-                    <form method="post" action="/index/addNewItem/">
-                        <div class="form-group">
-                            <label>新しい備品の名前</label>
-                            <input type="text" name="ITEMNAME" class="form-control">
-                            <label>所有者の名前</label>
-                            <input type="text" name="USERID" class="form-control">
+                    </div>
+                    <div id="tab2" class="tab-pane" role="tabpanel">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p class="mbr-text py-5 mbr-fonts-style display-7">
+                                    Mobirise is an easy website builder - just drop site elements to your page, add content and style it to look the way you like.
+                                </p>
+                            </div>
                         </div>
-
-                        <button type="submit" class="btn btn-primary btn-block">登録</button>
-
-                    </form>
-                </div>
-            </div>
-
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">ユーザー登録</a>
-                </h4>
-            </div>
-            <div id="collapse5" class="panel-collapse collapse">
-                <div class="container">
-                    <form method="post" action="/index/addNewUser/">
-                        <div class="form-group">
-                            <label>ユーザー名</label>
-                            <input type="text" name="UserName" class="form-control">
+                    </div>
+                    <div id="tab3" class="tab-pane" role="tabpanel">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p class="mbr-text py-5 mbr-fonts-style display-7">
+                                    Mobirise offers many site blocks in several themes, and though these blocks are pre-made, they are flexible. You can combine blocks in different ways on your pages.
+                                </p>
+                            </div>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block">登録</button>
-                    </form>
+                    </div>
+
+
+
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 
 
+<script src="assets/web/assets/jquery/jquery.min.js"></script>
+<script src="assets/popper/popper.min.js"></script>
+<script src="assets/tether/tether.min.js"></script>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/smoothscroll/smooth-scroll.js"></script>
+<script src="assets/parallax/jarallax.min.js"></script>
+<script src="assets/datatables/jquery.data-tables.min.js"></script>
+<script src="assets/datatables/data-tables.bootstrap4.min.js"></script>
+<script src="assets/mbr-tabs/mbr-tabs.js"></script>
+<script src="assets/theme/js/script.js"></script>
 
 
 </body>
+</html>
