@@ -1,5 +1,6 @@
 module github.com/onsd/Equipment-Management-2
-
+// + heroku goVersion go1.11
+// + heroku install ./cmd/... 
 require (
 	github.com/gin-contrib/sse v0.0.0-20170109093832-22d885f9ecc7
 	github.com/gin-gonic/gin v0.0.0-20170702092826-d459835d2b07
@@ -15,4 +16,3 @@ require (
 	gopkg.in/go-playground/validator.v8 v8.18.1
 	gopkg.in/yaml.v2 v2.0.0-20160928153709-a5b47d31c556
 )
-heroku install ./cmd/...
