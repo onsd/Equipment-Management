@@ -1,6 +1,6 @@
 module github.com/onsd/Equipment-Management-2
 // + heroku goVersion go1.11
-// + heroku install ./cmd/... 
+// + heroku install ./cmd/... ./vendor 
 require (
 	github.com/gin-contrib/sse v0.0.0-20170109093832-22d885f9ecc7
 	github.com/gin-gonic/gin v0.0.0-20170702092826-d459835d2b07
