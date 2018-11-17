@@ -6,9 +6,12 @@ import (
 	"github.com/onsd/Equipment-Management/controllers"
 	"net/http"
 	"strconv"
+	"os"
+	"log"
 )
 
 func main() {
+
 	router := gin.Default()
 	router.LoadHTMLGlob("templates/*.tmpl")
 	router.GET("", routingToIndex)
@@ -19,7 +22,12 @@ func main() {
 	router.POST("/index/addNewUser/", addNewUser)
 	router.POST("/index/borrowItem", borrowNewItemByUID)
 
-	router.Run(":8080")
+	port := os.Getenv("PORT")
+	if port == ""{
+		log.Fatal("$PORT must be set.")
+	}
+
+	router.Run(":" + port)
 }
 
 //API用　curlなどでもってこれる

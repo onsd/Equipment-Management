@@ -1,0 +1,1 @@
+web: equipment-management-taka

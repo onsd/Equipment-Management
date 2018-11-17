@@ -4,6 +4,7 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"time"
+	"os"
 )
 
 var db *gorm.DB
@@ -50,7 +51,14 @@ type lendingHistory struct {
 }
 
 func init() {
-	conn, err := gorm.Open("mysql", "taka:taka@/test?charset=utf8&parseTime=True&loc=Local")
+	//b0c56bd2917251:7ffb5376@us-cdbr-iron-east-01.cleardb.net/heroku_fced50cd8a8edc8
+	var datasource string
+	if os.Getenv("DATABASE_URL") != ""{
+		datasource = "b0c56bd2917251:7ffb5376@tcp(us-cdbr-iron-east-01.cleardb.net:3306)/heroku_fced50cd8a8edc8?parseTime=True"
+	}else{
+		datasource = "taka:taka@/test?charset=utf8&parseTime=True&loc=Local"
+	}
+	conn, err := gorm.Open("mysql", datasource)
 	if err != nil {
 		panic(err)
 	}
